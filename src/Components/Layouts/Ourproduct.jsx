@@ -2,15 +2,19 @@ import React, { useEffect, useState } from "react";
 import Headding from "../Headding";
 import Container from "../Container";
 import axios from "axios";
+import Product from "../Product";
 
 const Ourproduct = () => {
-    let [alldata, setalldata]= useState([])
-    useEffect(()=>{
-async function alldatas () {
-   let data=await axios.get("https://mostafakamalasif.github.io/Orebi-API/index.json"  )
-   setalldata(data)
-}
-    },[])
+  let [alldata, setalldata] = useState([]);
+  useEffect(() => {
+    async function alldatas() {
+      let data = await axios.get(
+        "https://mostafakamalasif.github.io/Orebi-API/index.json"
+      );
+      setalldata(data.data.data);
+    }
+    alldatas();
+  }, []);
   return (
     <>
       <div className="py-[94px]">
@@ -33,7 +37,18 @@ async function alldatas () {
                 <li className="hover:text-black ">TOP RATING</li>
               </ul>
             </div>
-
+            <div className="pt-[31px]  flex iteams-center gap-6">
+              {alldata.slice(0, 4).map((iteam) => (
+                <div className=" ">
+                  <Product
+                    productImg={iteam.img.formats.thumbnail.url}
+                    title={iteam.title}
+                    className={"pt-5"}
+                    price={`$${iteam.price}`} 
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </Container>
       </div>
