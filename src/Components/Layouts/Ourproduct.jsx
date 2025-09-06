@@ -9,7 +9,7 @@ const Ourproduct = () => {
   useEffect(() => {
     async function alldatas() {
       let data = await axios.get(
-        "https://mostafakamalasif.github.io/Orebi-API/index.json"
+        "https://mostafakamalasif.github.io/UOMO-API/index.json"
       );
       setalldata(data.data.data);
     }
@@ -37,14 +37,15 @@ const Ourproduct = () => {
                 <li className="hover:text-black ">TOP RATING</li>
               </ul>
             </div>
-            <div className="pt-[31px]  flex iteams-center gap-6">
-              {alldata.slice(0, 4).map((iteam) => (
+            <div className="pt-[31px] grid grid-cols-4  iteams-center gap-x-6  ">
+              {alldata.slice(0, 8).map((iteam) => (
                 <div className=" ">
                   <Product
                     productImg={iteam.img.formats.thumbnail.url}
                     title={iteam.title}
                     className={"pt-5"}
                     price={`$${iteam.price}`} 
+                    oldprice={iteam.old_price ? `$${iteam.old_price}` : null}
                   />
                 </div>
               ))}
